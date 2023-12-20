@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="davebartonccintegrationapi" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Sidney\ Jones\\repos\\ClaimChoice\\CCDaveBartonIntegration\\DaveBartonCCIntegrationAPI\\DaveBartonCCIntegrationAPI\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>
