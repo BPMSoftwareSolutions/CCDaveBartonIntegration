@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DaveBartonCCIntegrationAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a049565ead791b02470238a1cd6c5aac6e73217d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dcbd81834715e12bd5c254169ed2498d66581b0b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DaveBartonCCIntegrationAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DaveBartonCCIntegrationAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

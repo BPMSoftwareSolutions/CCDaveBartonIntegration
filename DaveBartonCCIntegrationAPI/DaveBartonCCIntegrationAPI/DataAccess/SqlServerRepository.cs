@@ -67,7 +67,7 @@ namespace DaveBartonCCIntegrationAPI.DataAccess
                     command.CommandText = "sp_InsertEligibilityRecord";
 
                     // Add parameters to the command from the EligibilityRecord object
-                    command.Parameters.AddWithValue("@SSN", record.SSN);
+                    command.Parameters.AddWithValue("@SSN", DecryptString(record.SSN));
                     command.Parameters.AddWithValue("@DateOfBirth", record.DateOfBirth);
                     command.Parameters.AddWithValue("@FullName", record.FullName);
                     command.Parameters.AddWithValue("@FirstName", record.FirstName);
@@ -83,7 +83,7 @@ namespace DaveBartonCCIntegrationAPI.DataAccess
                     command.Parameters.AddWithValue("@MaintenanceTypeCode", record.MaintenanceTypeCode);
                     command.Parameters.AddWithValue("@MaintenanceReasonCode", record.MaintenanceReasonCode);
                     command.Parameters.AddWithValue("@BenefitStatusCode", record.BenefitStatusCode);
-                    command.Parameters.AddWithValue("@SubscriberNumber", record.SubscriberNumber);
+                    command.Parameters.AddWithValue("@SubscriberNumber", DecryptString(record.SubscriberNumber));
                     command.Parameters.AddWithValue("@GroupOrPolicyNumber", record.GroupOrPolicyNumber);
                     command.Parameters.AddWithValue("@DepartmentOrAgencyNumber", record.DepartmentOrAgencyNumber);
                     command.Parameters.AddWithValue("@PhoneNumber", record.PhoneNumber);
@@ -120,38 +120,38 @@ namespace DaveBartonCCIntegrationAPI.DataAccess
                         {
                             var record = new EligibilityRecord
                             {
-                                EligibilityRecordId = reader.GetInt32(reader.GetOrdinal("EligibilityRecordId")),
-                                SSN = reader.IsDBNull(reader.GetOrdinal("SSN")) ? null : reader.GetString(reader.GetOrdinal("SSN")),
-                                DateOfBirth = reader.GetDateTime(reader.GetOrdinal("DateOfBirth")),
-                                FullName = reader.GetString(reader.GetOrdinal("FullName")),
-                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                                EligibilityRecordId = reader.IsDBNull(reader.GetOrdinal("EligibilityRecordId")) ? default(int) : reader.GetInt32(reader.GetOrdinal("EligibilityRecordId")),
+                                SSN = reader.IsDBNull(reader.GetOrdinal("SSN")) ? null : EncryptString(reader.GetString(reader.GetOrdinal("SSN"))),
+                                DateOfBirth = reader.IsDBNull(reader.GetOrdinal("DateOfBirth")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("DateOfBirth")),
+                                FullName = reader.IsDBNull(reader.GetOrdinal("FullName")) ? null : reader.GetString(reader.GetOrdinal("FullName")),
+                                FirstName = reader.IsDBNull(reader.GetOrdinal("FirstName")) ? null : reader.GetString(reader.GetOrdinal("FirstName")),
+                                LastName = reader.IsDBNull(reader.GetOrdinal("LastName")) ? null : reader.GetString(reader.GetOrdinal("LastName")),
                                 MiddleName = reader.IsDBNull(reader.GetOrdinal("MiddleName")) ? null : reader.GetString(reader.GetOrdinal("MiddleName")),
-                                Gender = reader.GetString(reader.GetOrdinal("Gender")),
-                                PlanSponsorName = reader.GetString(reader.GetOrdinal("PlanSponsorName")),
+                                Gender = reader.IsDBNull(reader.GetOrdinal("Gender")) ? null : reader.GetString(reader.GetOrdinal("Gender")),
+                                PlanSponsorName = reader.IsDBNull(reader.GetOrdinal("PlanSponsorName")) ? null : reader.GetString(reader.GetOrdinal("PlanSponsorName")),
                                 SponsorIdentifier = reader.IsDBNull(reader.GetOrdinal("SponsorIdentifier")) ? null : reader.GetString(reader.GetOrdinal("SponsorIdentifier")),
-                                InsurerName = reader.GetString(reader.GetOrdinal("InsurerName")),
+                                InsurerName = reader.IsDBNull(reader.GetOrdinal("InsurerName")) ? null : reader.GetString(reader.GetOrdinal("InsurerName")),
                                 InsurerIdentificationCode = reader.IsDBNull(reader.GetOrdinal("InsurerIdentificationCode")) ? null : reader.GetString(reader.GetOrdinal("InsurerIdentificationCode")),
-                                InsuredIndicator = reader.GetString(reader.GetOrdinal("InsuredIndicator")),
-                                IndividualRelationshipCode = reader.GetString(reader.GetOrdinal("IndividualRelationshipCode")),
-                                MaintenanceTypeCode = reader.GetString(reader.GetOrdinal("MaintenanceTypeCode")),
-                                MaintenanceReasonCode = reader.GetString(reader.GetOrdinal("MaintenanceReasonCode")),
-                                BenefitStatusCode = reader.GetString(reader.GetOrdinal("BenefitStatusCode")),
-                                SubscriberNumber = reader.IsDBNull(reader.GetOrdinal("SubscriberNumber")) ? null : reader.GetString(reader.GetOrdinal("SubscriberNumber")),
+                                InsuredIndicator = reader.IsDBNull(reader.GetOrdinal("InsuredIndicator")) ? null : reader.GetString(reader.GetOrdinal("InsuredIndicator")),
+                                IndividualRelationshipCode = reader.IsDBNull(reader.GetOrdinal("IndividualRelationshipCode")) ? null : reader.GetString(reader.GetOrdinal("IndividualRelationshipCode")),
+                                MaintenanceTypeCode = reader.IsDBNull(reader.GetOrdinal("MaintenanceTypeCode")) ? null : reader.GetString(reader.GetOrdinal("MaintenanceTypeCode")),
+                                MaintenanceReasonCode = reader.IsDBNull(reader.GetOrdinal("MaintenanceReasonCode")) ? null : reader.GetString(reader.GetOrdinal("MaintenanceReasonCode")),
+                                BenefitStatusCode = reader.IsDBNull(reader.GetOrdinal("BenefitStatusCode")) ? null : reader.GetString(reader.GetOrdinal("BenefitStatusCode")),
+                                SubscriberNumber = reader.IsDBNull(reader.GetOrdinal("SubscriberNumber")) ? null : EncryptString(reader.GetString(reader.GetOrdinal("SubscriberNumber"))),
                                 GroupOrPolicyNumber = reader.IsDBNull(reader.GetOrdinal("GroupOrPolicyNumber")) ? null : reader.GetString(reader.GetOrdinal("GroupOrPolicyNumber")),
                                 DepartmentOrAgencyNumber = reader.IsDBNull(reader.GetOrdinal("DepartmentOrAgencyNumber")) ? null : reader.GetString(reader.GetOrdinal("DepartmentOrAgencyNumber")),
                                 PhoneNumber = reader.IsDBNull(reader.GetOrdinal("PhoneNumber")) ? null : reader.GetString(reader.GetOrdinal("PhoneNumber")),
-                                StreetAddress = reader.GetString(reader.GetOrdinal("StreetAddress")),
-                                CityName = reader.GetString(reader.GetOrdinal("CityName")),
-                                StateOrProvinceCode = reader.GetString(reader.GetOrdinal("StateOrProvinceCode")),
-                                PostalCode = reader.GetString(reader.GetOrdinal("PostalCode")),
+                                StreetAddress = reader.IsDBNull(reader.GetOrdinal("StreetAddress")) ? null : reader.GetString(reader.GetOrdinal("StreetAddress")),
+                                CityName = reader.IsDBNull(reader.GetOrdinal("CityName")) ? null : reader.GetString(reader.GetOrdinal("CityName")),
+                                StateOrProvinceCode = reader.IsDBNull(reader.GetOrdinal("StateOrProvinceCode")) ? null : reader.GetString(reader.GetOrdinal("StateOrProvinceCode")),
+                                PostalCode = reader.IsDBNull(reader.GetOrdinal("PostalCode")) ? null : reader.GetString(reader.GetOrdinal("PostalCode")),
                                 MaritalStatus = reader.IsDBNull(reader.GetOrdinal("MaritalStatus")) ? null : reader.GetString(reader.GetOrdinal("MaritalStatus")),
-                                InsuranceLineCode = reader.GetString(reader.GetOrdinal("InsuranceLineCode")),
-                                CoverageTier = reader.GetString(reader.GetOrdinal("CoverageTier")),
-                                EffectiveDate = reader.GetDateTime(reader.GetOrdinal("EffectiveDate")),
-                                PlanCoverageDescription = reader.GetString(reader.GetOrdinal("PlanCoverageDescription")),
-                                CoverageMaintenanceCode = reader.GetString(reader.GetOrdinal("CoverageMaintenanceCode")),
-                                TransactionSetPurposeCode = reader.GetString(reader.GetOrdinal("TransactionSetPurposeCode"))
+                                InsuranceLineCode = reader.IsDBNull(reader.GetOrdinal("InsuranceLineCode")) ? null : reader.GetString(reader.GetOrdinal("InsuranceLineCode")),
+                                CoverageTier = reader.IsDBNull(reader.GetOrdinal("CoverageTier")) ? null : reader.GetString(reader.GetOrdinal("CoverageTier")),
+                                EffectiveDate = reader.IsDBNull(reader.GetOrdinal("EffectiveDate")) ? (DateTime?)null : reader.GetDateTime(reader.GetOrdinal("EffectiveDate")),
+                                PlanCoverageDescription = reader.IsDBNull(reader.GetOrdinal("PlanCoverageDescription")) ? null : reader.GetString(reader.GetOrdinal("PlanCoverageDescription")),
+                                CoverageMaintenanceCode = reader.IsDBNull(reader.GetOrdinal("CoverageMaintenanceCode")) ? null : reader.GetString(reader.GetOrdinal("CoverageMaintenanceCode")),
+                                TransactionSetPurposeCode = reader.IsDBNull(reader.GetOrdinal("TransactionSetPurposeCode")) ? null : reader.GetString(reader.GetOrdinal("TransactionSetPurposeCode"))
                             };
 
                             records.Add(record);
@@ -161,6 +161,59 @@ namespace DaveBartonCCIntegrationAPI.DataAccess
             }
 
             return records;
+        }
+
+        public string EncryptString(string plainText)
+        {
+            byte[] iv = new byte[16];
+            byte[] array;
+
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = Convert.FromBase64String(_aesKey);
+                aes.IV = iv;
+
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+                using (MemoryStream memoryStream = new MemoryStream())
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter streamWriter = new StreamWriter(cryptoStream))
+                        {
+                            streamWriter.Write(plainText);
+                        }
+                        array = memoryStream.ToArray();
+                    }
+                }
+            }
+
+            return Convert.ToBase64String(array);
+        }
+
+        public string DecryptString(string cipherText)
+        {
+            byte[] iv = new byte[16];
+            byte[] buffer = Convert.FromBase64String(cipherText);
+
+            using (Aes aes = Aes.Create())
+            {
+                aes.Key = Convert.FromBase64String(_aesKey); // Decode the Base64 key string
+                aes.IV = iv;
+
+                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+                using (MemoryStream memoryStream = new MemoryStream(buffer))
+                {
+                    using (CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader streamReader = new StreamReader(cryptoStream))
+                        {
+                            return streamReader.ReadToEnd();
+                        }
+                    }
+                }
+            }
         }
     }
 }

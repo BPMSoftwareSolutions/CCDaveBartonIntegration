@@ -2,7 +2,7 @@ drop table EligibilityRecord
 go
 CREATE TABLE EligibilityRecord (
 	EligibilityRecordId int identity(1,1) primary key,
-    SSN NVARCHAR(9),
+    SSN NVARCHAR(128),
     DateOfBirth datetime,
     FullName NVARCHAR(50),
     FirstName NVARCHAR(50),
@@ -18,7 +18,7 @@ CREATE TABLE EligibilityRecord (
     MaintenanceTypeCode NVARCHAR(50),
     MaintenanceReasonCode NVARCHAR(50),
     BenefitStatusCode NVARCHAR(10),
-    SubscriberNumber NVARCHAR(9),
+    SubscriberNumber NVARCHAR(128),
     GroupOrPolicyNumber NVARCHAR(10),
     DepartmentOrAgencyNumber NVARCHAR(50),
     PhoneNumber NVARCHAR(20),
@@ -37,9 +37,9 @@ CREATE TABLE EligibilityRecord (
 );
 go
 
-CREATE PROCEDURE sp_InsertEligibilityRecord
-    @SSN NVARCHAR(9),
-    @DateOfBirth datetime,
+alter PROCEDURE sp_InsertEligibilityRecord
+    @SSN NVARCHAR(128),
+    @DateOfBirth datetime = null,
     @FullName NVARCHAR(50),
     @FirstName NVARCHAR(50),
     @LastName NVARCHAR(50),
@@ -54,7 +54,7 @@ CREATE PROCEDURE sp_InsertEligibilityRecord
     @MaintenanceTypeCode NVARCHAR(50),
     @MaintenanceReasonCode NVARCHAR(50),
     @BenefitStatusCode NVARCHAR(10),
-    @SubscriberNumber NVARCHAR(9),
+    @SubscriberNumber NVARCHAR(128),
     @GroupOrPolicyNumber NVARCHAR(10),
     @DepartmentOrAgencyNumber NVARCHAR(50),
     @PhoneNumber NVARCHAR(20),
@@ -65,7 +65,7 @@ CREATE PROCEDURE sp_InsertEligibilityRecord
     @MaritalStatus NVARCHAR(25),
     @InsuranceLineCode NVARCHAR(50),
     @CoverageTier NVARCHAR(50),
-    @EffectiveDate datetime,
+    @EffectiveDate datetime = null,
     @PlanCoverageDescription NVARCHAR(50),
     @CoverageMaintenanceCode NVARCHAR(50),
     @TransactionSetPurposeCode NVARCHAR(50)
@@ -141,21 +141,21 @@ BEGIN
 END
 GO
 
-CREATE TABLE [dbo].[User](
-	[UserId] [int] IDENTITY(1,1) NOT NULL,
-	[Username] [nvarchar](255) NOT NULL,
-	[PasswordHash] [nvarchar](255) NOT NULL,
-	[FirstName] [nvarchar](255) NULL,
-	[LastName] [nvarchar](255) NULL,
-	[Email] [nvarchar](255) NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[UserId] ASC
-)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
-UNIQUE NONCLUSTERED 
-(
-	[Username] ASC
-)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
+--CREATE TABLE [dbo].[User](
+--	[UserId] [int] IDENTITY(1,1) NOT NULL,
+--	[Username] [nvarchar](255) NOT NULL,
+--	[PasswordHash] [nvarchar](255) NOT NULL,
+--	[FirstName] [nvarchar](255) NULL,
+--	[LastName] [nvarchar](255) NULL,
+--	[Email] [nvarchar](255) NULL,
+--PRIMARY KEY CLUSTERED 
+--(
+--	[UserId] ASC
+--)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+--UNIQUE NONCLUSTERED 
+--(
+--	[Username] ASC
+--)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+--) ON [PRIMARY]
+--GO
 

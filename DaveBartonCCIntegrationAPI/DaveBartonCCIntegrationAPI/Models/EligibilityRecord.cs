@@ -4,7 +4,7 @@
     {
         public int EligibilityRecordId { get; set; }
         public string SSN { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public string FullName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -30,7 +30,7 @@
         public string MaritalStatus { get; set; }
         public string InsuranceLineCode { get; set; }
         public string CoverageTier { get; set; }
-        public DateTime EffectiveDate { get; set; }
+        public DateTime? EffectiveDate { get; set; }
         public string PlanCoverageDescription { get; set; }
         public string CoverageMaintenanceCode { get; set; }
         public string TransactionSetPurposeCode { get; set; }
